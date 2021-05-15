@@ -23,4 +23,7 @@ public class StringCalculatorTest
         assertEquals(4,stringCalculator.add("4"));
     }
     
+    @Test void returnSumTwoNumberString(){
+        assertEquals(3,stringCalculator.add("1,2"));
+    }
 }
