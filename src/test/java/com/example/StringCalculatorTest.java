@@ -15,4 +15,8 @@ public class StringCalculatorTest
         stringCalculator = new StringCalculator();
     }
 
+    @Test void returnZeroEmptyString(){
+        assertEquals(0,stringCalculator.add(""));
+    }
+    
 }
