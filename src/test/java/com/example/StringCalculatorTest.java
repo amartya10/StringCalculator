@@ -18,5 +18,9 @@ public class StringCalculatorTest
     @Test void returnZeroEmptyString(){
         assertEquals(0,stringCalculator.add(""));
     }
+    @Test void returnNumberSingleElementString(){
+        assertEquals(1,stringCalculator.add("1"));
+        assertEquals(4,stringCalculator.add("4"));
+    }
     
 }
