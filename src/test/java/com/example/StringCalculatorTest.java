@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class StringCalculatorTest
 {
@@ -27,14 +29,21 @@ public class StringCalculatorTest
         assertEquals(3,stringCalculator.add("1,2"));
     }
 
-    @Test void returnSumManyNumberString(){
-        assertEquals(6,stringCalculator.add("2,3,1"));
-        assertEquals(55,stringCalculator.add("1,2,3,4,5,6,7,8,9,10"));
+    @ParameterizedTest
+    @CsvSource(value = {
+            "2,3,1:6",
+            "1,2,3,4,5,6,7,8,9,10:55"},delimiter = ':')
+    void returnSumManyNumberString(String numbers,int output){
+        assertEquals(output,stringCalculator.add(numbers));
     }
-    @Test void returnSumNumbersSeparatedByNewLine(){
-        assertEquals(7,stringCalculator.add("1\n2,4"));
-        assertEquals(10,stringCalculator.add("1\n2\n3,4"));
-        assertEquals(20,stringCalculator.add("10,1\n2\n3,4"));
-        assertEquals(250,stringCalculator.add("10,20\n100,50\n30,40"));
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "'1\n2,4':7",
+            "'1\n2\n3,4':10",
+            "'10,20\n100,50\n30,40':250"},delimiter = ':')
+    void returnSumNumbersSeparatedByNewLine(String numbers,int output){
+        assertEquals(output,stringCalculator.add(numbers));
+
     }
 }
