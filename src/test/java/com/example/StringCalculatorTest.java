@@ -61,4 +61,15 @@ public class StringCalculatorTest
 
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"'-2,-3,-1':Negative Number Not Allowed -2-3-1",
+            "'//;\n1;-2':Negative Number Not Allowed -2",
+            "'-2':Negative Number Not Allowed -2",
+            "'//;\n1;-2;-3':Negative Number Not Allowed -2-3",
+    },delimiter = ':')
+    void throwMultipleNegativeNumberException(String numbers,String output) throws Exception {
+        Exception  exception = assertThrows(IllegalArgumentException.class , () -> stringCalculator.add(numbers));
+        System.out.print(exception.getMessage());
+        assertTrue(exception.getMessage().equals(output));
+    }
 }
