@@ -46,4 +46,13 @@ public class StringCalculatorTest
         assertEquals(output,stringCalculator.add(numbers));
 
     }
+
+    @Test
+    void returnSumNumbersSeparatedByCustomDelimiter(){
+        assertEquals(3,stringCalculator.add("//;\n1;2"));
+        assertEquals(3,stringCalculator.add("//:\n1:2"));
+        assertEquals(3,stringCalculator.add("//;\n3"));
+
+    }
+
 }
