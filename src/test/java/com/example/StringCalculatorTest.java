@@ -72,4 +72,12 @@ public class StringCalculatorTest
         System.out.print(exception.getMessage());
         assertTrue(exception.getMessage().equals(output));
     }
+
+    @Test
+    void skipNumberGt1000(){
+        assertEquals(4,stringCalculator.add("//;\n1;3;1001"));
+        assertEquals(1000,stringCalculator.add("//;\n1001;1000"));
+        assertEquals(0,stringCalculator.add("//;\n1001"));
+    }
+
 }

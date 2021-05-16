@@ -41,7 +41,9 @@ public class StringCalculator
                          throw  new IllegalArgumentException("Negative Number Not Allowed " + stringNumbers);
                        }
                    }
-                   sum.updateAndGet(v -> v + number);
+                   if (number <= 1000){
+                    sum.updateAndGet(v -> v + number);
+                   }
                 });
         return  sum.get();
     }
