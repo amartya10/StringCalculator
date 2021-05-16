@@ -17,15 +17,15 @@ public class StringCalculatorTest
         stringCalculator = new StringCalculator();
     }
 
-    @Test void returnZeroEmptyString(){
+    @Test void returnZeroEmptyString() throws  Exception{
         assertEquals(0,stringCalculator.add(""));
     }
-    @Test void returnNumberSingleElementString(){
+    @Test void returnNumberSingleElementString() throws Exception {
         assertEquals(1,stringCalculator.add("1"));
         assertEquals(4,stringCalculator.add("4"));
     }
     
-    @Test void returnSumTwoNumberString(){
+    @Test void returnSumTwoNumberString() throws Exception {
         assertEquals(3,stringCalculator.add("1,2"));
     }
 
@@ -33,7 +33,7 @@ public class StringCalculatorTest
     @CsvSource(value = {
             "2,3,1:6",
             "1,2,3,4,5,6,7,8,9,10:55"},delimiter = ':')
-    void returnSumManyNumberString(String numbers,int output){
+    void returnSumManyNumberString(String numbers,int output) throws Exception {
         assertEquals(output,stringCalculator.add(numbers));
     }
 
@@ -42,16 +42,22 @@ public class StringCalculatorTest
             "'1\n2,4':7",
             "'1\n2\n3,4':10",
             "'10,20\n100,50\n30,40':250"},delimiter = ':')
-    void returnSumNumbersSeparatedByNewLine(String numbers,int output){
+    void returnSumNumbersSeparatedByNewLine(String numbers,int output) throws Exception {
         assertEquals(output,stringCalculator.add(numbers));
 
     }
 
     @Test
-    void returnSumNumbersSeparatedByCustomDelimiter(){
+    void returnSumNumbersSeparatedByCustomDelimiter() throws Exception {
         assertEquals(3,stringCalculator.add("//;\n1;2"));
         assertEquals(3,stringCalculator.add("//:\n1:2"));
         assertEquals(3,stringCalculator.add("//;\n3"));
+
+    }
+    @Test
+    void throwNegativeNumberException() throws Exception {
+        String exceptedMessage = "Negative Number Not Allowed -2";
+        assertThrows(IllegalArgumentException.class , () -> stringCalculator.add("//;\n1;-2"));
 
     }
 

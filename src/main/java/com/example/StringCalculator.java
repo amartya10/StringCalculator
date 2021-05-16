@@ -23,6 +23,8 @@ public class StringCalculator
         }
         return Arrays.stream(numbersSeparatedByDelimiters.split("[" + regex + "]"))
                 .mapToInt(Integer::parseInt)
-                .sum();
+                .peek(i -> {
+                    if (i < 0) throw  new IllegalArgumentException("Negative Number Not Allowed " + i);
+                }).sum();
     }
 }
