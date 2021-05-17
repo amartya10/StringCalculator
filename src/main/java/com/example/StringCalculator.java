@@ -22,11 +22,10 @@ public class StringCalculator
         StringBuilder regex =  new StringBuilder("\n|,");
         String numbersSeparatedByDelimiterStartEnd = numbers;
         if (numbers.startsWith(START_DELIMITER_WITH)){
-            int startIndexDelimiter = numbers.indexOf(START_DELIMITER_WITH) + START_DELIMITER_WITH.length();
+            int startIndexDelimiter = START_DELIMITER_WITH.length();
             int endIndexDelimiter = numbers.indexOf(END_DELIMITER_WITH);
             String delimiters = numbers.substring(startIndexDelimiter,endIndexDelimiter);
-            String [ ] separatedDelimiters = delimiters.replaceAll("]\\[","|").replaceAll("[\\[\\]]","").split("[\\|]",2);
-            Arrays.stream(separatedDelimiters).
+            Arrays.stream(getDelimiters(delimiters)).
                     forEach(delimiter -> regex.append("|"+Pattern.quote(delimiter)) );
             numbersSeparatedByDelimiterStartEnd = numbers.substring(endIndexDelimiter + 1);
         }
@@ -54,4 +53,11 @@ public class StringCalculator
                 .forEach(negativeNumbers::append);
         return  negativeNumbers.toString() ;
     }
+    public String  [] getDelimiters(String delimiters){
+        return  delimiters
+                .replaceAll("]\\[","|")
+                .replaceAll("[\\[\\]]","")
+                .split("[\\|]");
+    }
+
 }
