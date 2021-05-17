@@ -36,12 +36,8 @@ public class StringCalculator
                 .forEach(index -> {
                    Integer number = Integer.parseInt(numbersSeparated[index]);
                    if (number < 0 ){
-                       int [] negativeNumbers = getNegativeNumbers(Arrays.copyOfRange( numbersSeparated,index,numbersSeparated.length));
-                       StringBuilder stringNumbers = new StringBuilder();
-                       Arrays.stream(negativeNumbers)
-                               .forEach(negativeNumber -> stringNumbers.append(negativeNumber));
-                       throw  new IllegalArgumentException("Negative Number Not Allowed " + stringNumbers);
-
+                       String negativeNumbers = getNegativeNumbers(Arrays.copyOfRange( numbersSeparated,index,numbersSeparated.length));
+                       throw  new IllegalArgumentException("Negative Number Not Allowed " + negativeNumbers);
                    }
                    if (number <= 1000){
                     sum.updateAndGet(v -> v + number);
@@ -49,10 +45,13 @@ public class StringCalculator
                 });
         return  sum.get();
     }
-    public int[] getNegativeNumbers(String [] numbers){
-        return Arrays.stream(numbers)
+
+    public String getNegativeNumbers(String [] numbers){
+        StringBuilder negativeNumbers = new StringBuilder();
+        Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .filter(i -> i < 0)
-                .toArray();
+                .forEach(negativeNumbers::append);
+        return  negativeNumbers.toString() ;
     }
 }
