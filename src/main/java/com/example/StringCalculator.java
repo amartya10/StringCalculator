@@ -30,19 +30,7 @@ public class StringCalculator
             numbersSeparatedByDelimiterStartEnd = numbers.substring(endIndexDelimiter + 1);
         }
         String [] numbersSeparated = numbersSeparatedByDelimiterStartEnd.split(regex.toString());
-        AtomicReference<Integer> sum = new AtomicReference<>(0);
-        IntStream.range(0,numbersSeparated.length)
-                .forEach(index -> {
-                   Integer number = Integer.parseInt(numbersSeparated[index]);
-                   if (number < 0 ){
-                       String negativeNumbers = getNegativeNumbers(Arrays.copyOfRange( numbersSeparated,index,numbersSeparated.length));
-                       throw  new IllegalArgumentException("Negative Number Not Allowed " + negativeNumbers);
-                   }
-                   if (number <= 1000){
-                    sum.updateAndGet(v -> v + number);
-                   }
-                });
-        return  sum.get();
+        return  _add(numbersSeparated);
     }
 
     public String getNegativeNumbers(String [] numbers){
@@ -59,5 +47,22 @@ public class StringCalculator
                 .replaceAll("[\\[\\]]","")
                 .split("[\\|]");
     }
+
+    public int _add(String []  numbersSeparated) {
+        AtomicReference<Integer> sum = new AtomicReference<>(0);
+        IntStream.range(0,numbersSeparated.length)
+                .forEach(index -> {
+                    Integer number = Integer.parseInt(numbersSeparated[index]);
+                    if (number < 0 ){
+                        String negativeNumbers = getNegativeNumbers(Arrays.copyOfRange( numbersSeparated,index,numbersSeparated.length));
+                        throw  new IllegalArgumentException("Negative Number Not Allowed " + negativeNumbers);
+                    }
+                    if (number <= 1000){
+                        sum.updateAndGet(v -> v + number);
+                    }
+                });
+        return  sum.get();
+    }
+
 
 }
