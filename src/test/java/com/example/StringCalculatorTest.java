@@ -80,4 +80,9 @@ public class StringCalculatorTest
         assertEquals(0,stringCalculator.add("//;\n1001"));
     }
 
+    @Test
+    void returnSumPassingDelimiterAnyLength(){
+        assertEquals(22,stringCalculator.add("//[;;]\n10;;12"));
+        assertEquals(22,stringCalculator.add("//[:*:]\n10:*:12"));
+    }
 }
