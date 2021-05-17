@@ -69,7 +69,6 @@ public class StringCalculatorTest
     },delimiter = ':')
     void throwMultipleNegativeNumberException(String numbers,String output) throws Exception {
         Exception  exception = assertThrows(IllegalArgumentException.class , () -> stringCalculator.add(numbers));
-        System.out.print(exception.getMessage());
         assertTrue(exception.getMessage().equals(output));
     }
 
