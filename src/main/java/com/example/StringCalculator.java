@@ -24,10 +24,11 @@ public class StringCalculator
         if (numbers.startsWith(START_DELIMITER_WITH)){
             int startIndexDelimiter = numbers.indexOf(START_DELIMITER_WITH) + START_DELIMITER_WITH.length();
             int endIndexDelimiter = numbers.indexOf(END_DELIMITER_WITH);
-            String delimiter = numbers.substring(startIndexDelimiter,endIndexDelimiter);
-            delimiter = delimiter.replaceAll("[\\[\\]]","");
+            String delimiters = numbers.substring(startIndexDelimiter,endIndexDelimiter);
+            String [ ] separatedDelimiters = delimiters.replaceAll("]\\[","|").replaceAll("[\\[\\]]","").split("[\\|]",2);
+            Arrays.stream(separatedDelimiters).
+                    forEach(delimiter -> regex.append("|"+Pattern.quote(delimiter)) );
             numbersSeparatedByDelimiterStartEnd = numbers.substring(endIndexDelimiter + 1);
-            regex.append("|" + Pattern.quote(delimiter));
         }
         String [] numbersSeparated = numbersSeparatedByDelimiterStartEnd.split(regex.toString());
         AtomicReference<Integer> sum = new AtomicReference<>(0);

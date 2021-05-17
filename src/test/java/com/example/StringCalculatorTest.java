@@ -85,4 +85,13 @@ public class StringCalculatorTest
         assertEquals(22,stringCalculator.add("//[;;]\n10;;12"));
         assertEquals(22,stringCalculator.add("//[:*:]\n10:*:12"));
     }
+
+    @Test
+    void returnSumPassingMultipleDelimiters(){
+        assertEquals(33,stringCalculator.add("//[;;][::]\n10;;12::11"));
+        assertEquals(36,stringCalculator.add("//[****][::]\n10****12::11\n3"));
+
+
+    }
+
 }
