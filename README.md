@@ -1,4 +1,5 @@
 # String-Calculator
+  kata - tdd
 
 ## Run
   Docker
